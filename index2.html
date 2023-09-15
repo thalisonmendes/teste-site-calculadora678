@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .fundo{
+            background-color: #22255f;
+            height: 100vh;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+        .calculadora{
+            position: absolute;
+            background-color: #000023;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            border-radius: 15px;
+            padding: 15px;
+        }
+        .botao{
+            width: 50px;
+            height: 50px;
+            font-size: 25px;
+            cursor: pointer;
+            margin: 3px;
+            background-color: #22255f;
+            border: none;
+            color: #fff;
+        }
+        .botao:hover{
+            background-color: #090932;
+        }
+        #resultado{
+            background-color: #22255f;
+            width: 207px;
+            height: 30px;
+            margin: 5px;
+            font-size: 25px;
+            color: #000023;
+            text-align: right;
+            padding: 5px;
+        }
+        #historico{
+            position: absolute;
+            background-color: #414475;
+            top: 50%;
+            left: 350px;
+            transform: translate(-50%,-50%);
+            border-radius: 15px;
+            padding: 15px;
+            overflow-y: scroll;
+            max-height: 150px;
+        }
+        *{
+    text-decoration: none;
+}
+.navbar{
+    background-color: #000023;
+    font-family: calibri;
+    height: 100px;
+}
+.navdiv{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+li{
+    list-style: none;
+    display: inline-flex;
+    margin-top: 15px;
+}
+li a{
+    margin-right: 30px;
+    color: white;
+}
+img{
+    margin-left: 10px;
+}
+button {
+    background-color: rgb(114, 216, 241);
+    border-radius: 5px;
+}
+button a{
+    color: rgb(10, 9, 9);
+}
+.logo {
+            text-align: center;
+            background: #000023;
+            color: white;
+            margin: 0px;
+            padding: 15px;
+        }
+        .logo img {
+        width: 30px;
+        height: 30px;
+        margin: 0px;
+     }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navdiv">
+            <div class="logo"><img src="logomodoescuro.png" alt="logo da calculadora no tema escuro">
+                <h1>Calculadora Web</h1></div>
+            <ul>
+                <li> <a href="index2.html">Início</a> </li>
+                <li> <a href="#">Tutorial</a> </li>
+                <li> <a href="index2.html">Este Projeto</a> </li>
+                <button> <a href="index.html">Modo Claro</a> </button>
+            </ul>
+        </div>
+    </nav>
+    <div class="fundo">
+        <div class="calculadora">
+            <h1>Calculadora</h1>
+            <p id="resultado"></p>
+            <table>
+                <tr>
+                    <td><button class="botao" onclick="clean()">C</button></td>
+                    <td><button class="botao" onclick="back()"><</button></td>
+                    <td><button class="botao" onclick="insert('/')">/</button></td>
+                    <td><button class="botao" onclick="insert('*')">X</button></td>
+                </tr>
+                <tr>
+                    <td><button class="botao" onclick="insert('7')">7</button></td>
+                    <td><button class="botao" onclick="insert('8')">8</button></td>
+                    <td><button class="botao" onclick="insert('9')">9</button></td>
+                    <td><button class="botao" onclick="insert('-')">-</button></td>
+                </tr>
+                <tr>
+                    <td><button class="botao" onclick="insert('4')">4</button></td>
+                    <td><button class="botao" onclick="insert('5')">5</button></td>
+                    <td><button class="botao" onclick="insert('6')">6</button></td>
+                    <td><button class="botao" onclick="insert('+')">+</button></td>
+                </tr>
+                <tr>
+                    <td><button class="botao" onclick="insert('1')">1</button></td>
+                    <td><button class="botao" onclick="insert('2')">2</button></td>
+                    <td><button class="botao" onclick="insert('3')">3</button></td>
+                    <td rowspan="2"><button class="botao" style="height: 106px;" onclick="calcular()">=</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button class="botao" style="width: 106px;" onclick="insert('0')">0</button></td>
+                    <td><button class="botao" onclick="insert('.')">.</button></td>
+                </tr>
+            </table>
+            <table>
+                <p id="historico"></p>
+            </table>
+        </div>
+    </div>
+    <script>
+        function insert(num)
+        {
+            var numero = document.getElementById('resultado').innerHTML;
+            document.getElementById('resultado').innerHTML = numero + num;
+        }
+        function clean()
+        {
+            document.getElementById('resultado').innerHTML = "";
+        }
+        function back()
+        {
+            var resultado = document.getElementById('resultado').innerHTML;
+            document.getElementById('resultado').innerHTML = resultado.substring(0, resultado.length -1);
+        }
+        function calcular() {
+    var resultado = document.getElementById('resultado').innerHTML;
+    var historico = document.getElementById('historico').innerHTML;
+    
+    if (resultado) {
+        historico += resultado + " = " + eval(resultado) + "<br>";
+        document.getElementById('resultado').innerHTML = eval(resultado);
+    } else {
+        document.getElementById('resultado').innerHTML = "Nada...";
+    }
+    
+    document.getElementById('historico').innerHTML = historico;
+}
+    </script>
+</body>
+</html>
